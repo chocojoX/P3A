@@ -9,7 +9,7 @@ public class Edge {
 		this.label=name;
 		this.oid=oid;
 		this.father=father;
-		this.son=son;
+		this.son=Son;
 	}
 	
 	

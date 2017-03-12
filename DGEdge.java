@@ -10,7 +10,7 @@ public class DGEdge {
 		this.label= label;
 		this.oid= oid;
 		this.father= father;
-		this.son= son;
+		this.son= Son;
 		this.dg = dg;
 	}
 	
