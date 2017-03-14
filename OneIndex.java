@@ -61,7 +61,6 @@ public class OneIndex {
 		
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		HashSet<INode> Sons = new HashSet<INode>();
-		System.out.println(father.label);
 		for(IEdge e : father.outGoing){
 			String label = e.label;
 			if(labelsSet.contains(label)){
@@ -76,7 +75,6 @@ public class OneIndex {
 				if(!labels.contains(e.label) && e.father.Ioid == father.Ioid){
 					plausible = false;
 				}
-				//System.out.println(e.label +  labels);
 				if(e.father.Ioid == father.Ioid){
 					inComingLabels.add(e.label);
 				}
@@ -90,7 +88,6 @@ public class OneIndex {
 				result.add(n.Ioid);
 			}
 		}
-		//System.out.println("result : " + result);
 		return result;
 	}
 	
@@ -108,7 +105,6 @@ public class OneIndex {
 		int cmpt = 0;
 		while(!I.allFathersClassified.isEmpty()){
 			cmpt++;
-			//System.out.println("Nombre d'itérations : " + cmpt);
 			I.recursiveMakeOneIndex();
 		}
 		return I;
@@ -122,7 +118,6 @@ public class OneIndex {
 			this.allFathersClassified.remove(0);
 			return;
 		}
-		//System.out.println("node oid : " + n.getOid());
 		// mapIoidLabel contains the pairs (father.Ioid, labels of edges linking father and son in tree)
 		Hashtable<Integer, ArrayList<String>> mapIoidLabel = new Hashtable<Integer, ArrayList<String>>();
 		// IfathersOid contains the Ioid of the fathers of the node n
@@ -152,7 +147,6 @@ public class OneIndex {
 		ArrayList<Integer> candidates = 
 				this.existsPartialEquivalenceClass(this.IoidTable.get(IfathersOid.get(0)), 
 						labels);
-		//System.out.println(this.nextOidNode + " candidates : " + candidates);
 		for(int i = 1; i<IfathersOid.size(); i++){
 			labels = mapIoidLabel.get(IfathersOid.get(i));
 			
@@ -187,21 +181,7 @@ public class OneIndex {
 			if(!IfathersOfCandidate.containsAll(IfathersOfn) || !IfathersOfn.containsAll(IfathersOfCandidate)){
 				candidates.remove(candidates.indexOf(Ioid));
 			}
-			
-			/*if(!IfathersOfCandidate.equals(IfathersOfn)){
-				candidates.remove(candidates.indexOf(Ioid));
-			}*/
 		}
-
-//		if(n.getOid() ==281){
-//			System.out.println("candidates size : " + candidates.size());
-//			try {
-//				Thread.sleep((long) 100.);
-//			} catch (InterruptedException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
-//		}
 		
 
 		if(candidates.size()==1 && candidates.get(0)!=-1){
@@ -239,8 +219,8 @@ public class OneIndex {
 			INode IN = this.IoidTable.get(Ioid);
 			this.targetHash.put(n.getOid(), IN);
 			IN.targetOid.add(n.getOid());
-			System.out.println("Plusieurs classes d'équivalences pour le noeud numero" + n.getOid() +
-					"c'est un gros problème qui ne devrait jamais être arrivé :(");
+			System.out.println("Plusieurs classes d'Ã©quivalences pour le noeud numero" + n.getOid() +
+					"c'est un gros problÃ¨me qui ne devrait jamais Ãªtre arrivÃ© :(");
 			try {
 				Thread.sleep((long) 1000.);
 			} catch (InterruptedException e1) {
@@ -248,8 +228,6 @@ public class OneIndex {
 				e1.printStackTrace();
 			}
 		}
-		//System.out.println("Nodes with all classsified fathers : " + this.allFathersClassified.size());
-		//System.out.println("Nodes yet to be insertd in the index : " + this.unclassifiedNodesOid.size());
 		int idx = this.unclassifiedNodesOid.indexOf(n.getOid());
 		
 		if(idx>=0){
